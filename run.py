@@ -5,7 +5,22 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "<h1>Hello World!</h1>"
+    """Main page with welcome & instructions"""
+    return "<h1>Hello World!</h1><p>To send a message: /USERNAME/MESSAGE</p>"
+
+
+@app.route('/<username>')
+def user(username):
+    # Creates the Username
+    return "Hi " + username
+
+
+@app.route('/<username>/<message>')
+def send_message(username, message):
+    # Creates the message
+    return "{0}: {1}".format(username, message)
+    return "Message " + message
+
 
 app.run(
     host=os.environ.get("IP", "0.0.0.0"),
